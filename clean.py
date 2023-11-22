@@ -1,5 +1,5 @@
 import os
-from colorama import init, Fore, Back, Style
+from colorama import init, Fore, Style
 
 
 class TempDelFiles:
@@ -71,7 +71,6 @@ class TempDelFiles:
         os.system('cls')
         print(Fore.WHITE + f">>>> DRI LIXEIRO PASSANDO <<<<" + Style.RESET_ALL)
         self.logInformation("TEMP", self.quantity_files_temp, self.quantity_files_temp_permision_error)
-        
         self.logInformation("[%TEMP%]", self.quantity_files_tempwin, self.quantity_files_tempwin_permision_error)
         self.logInformation("PREFETCH", self.quantity_files_prefetch, self.quantity_files_prefetch_permision_error)
 
@@ -84,7 +83,6 @@ class TempDelFiles:
             print(Fore.BLUE + f"A PASTA {path_name} ESTAVA VAZIA!!!"  + Style.RESET_ALL)
         elif quantity_files_removed > 0 and quantity_errors_permission == 0:
             print(f"ARQUIVOS APAGADOS EM {path_name}: " + Fore.GREEN + f'{quantity_files_removed}' + Style.RESET_ALL)
-            
 
 init_class = TempDelFiles()
 init_class.addValueInPathFolders()
