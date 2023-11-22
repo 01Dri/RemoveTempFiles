@@ -9,9 +9,6 @@ class TempDelFiles:
 
         self.nick = None
 
-        self.quantity_generitic = 0
-        self.quantity_error_generitic = 0
-
         self.quantity_files_temp = 0
         self.quantity_files_temp_permision_error = 0
 
@@ -30,7 +27,7 @@ class TempDelFiles:
         self.nick = os.getlogin()
         if self.PLUSTEMP == None:
             os.environ['PLUSTEMP'] = f'C:\\Users\\{self.nick}\\AppData\\Local\\Temp'
-            self.TEMPWIN = os.environ.get('PLUSTEMP')
+            self.PLUSTEMP = os.environ.get('PLUSTEMP')
 
 
         self.PREFETCH = os.environ.get('PREFETCH')
@@ -49,13 +46,13 @@ class TempDelFiles:
                 self.quantity_files_temp_permision_error += 1
 
     def removeAllFilesTempWinPath(self):
-        for file in os.listdir(self.TEMPWIN):
-                path_file = os.path.join(self.TEMPWIN, file)
-        try:
-            os.remove(path_file)
-            self.quantity_files_tempwin += 1
-        except PermissionError:
-            self.quantity_files_tempwin_permision_error += 1
+        for file in os.listdir(self.PLUSTEMP):
+            path_file = os.path.join(self.PLUSTEMP, file)
+            try:
+                os.remove(path_file)
+                self.quantity_files_tempwin += 1
+            except PermissionError:
+                self.quantity_files_tempwin_permision_error += 1
 
     def removeAllFilesPrefetchPath(self):
         for file in os.listdir(self.PREFETCH):
@@ -67,14 +64,11 @@ class TempDelFiles:
                 self.quantity_files_prefetch_permision_error += 1
 
 
-    def log(self):
-        print(self.TEMP)
-        print(self.TEMPWIN)
-        print(self.PREFETCH)
-
     def showInformationForUser(self):
         os.system('cls')
-        print(">>>> DRI LIXEIRO PASSANDO <<<<")
+        print("=====================================================")
+        print(f"OLÁ {self.nick.upper()} SEGUE OS ARQUIVOS APAGADOS: ")
+        print("=====================================================")
         self.logInformation("TEMP", self.quantity_files_temp, self.quantity_files_temp_permision_error)
         
         self.logInformation("[%TEMP%]", self.quantity_files_tempwin, self.quantity_files_tempwin_permision_error)
