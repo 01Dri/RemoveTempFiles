@@ -65,11 +65,20 @@ class TempDelFiles:
                 self.quantity_files_prefetch += 1
             except PermissionError:
                 self.quantity_files_prefetch_permision_error += 1
+    def enableLogs(self, path):
+        print("")
+        print(f"Todos os arquivos em: {path}")
+        print(os.listdir(path))
+    
 
-
-    def showInformationForUser(self):
+    def showInformationForUser(self, conditionLogs):
         os.system('cls')
+        
         print(Fore.WHITE + f">>>> DRI LIXEIRO PASSANDO <<<<" + Style.RESET_ALL)
+        if conditionLogs:
+            self.enableLogs(self.TEMP)
+            self.enableLogs(self.PLUSTEMP)
+            self.enableLogs(self.PREFETCH)
         self.logInformation("TEMP", self.quantity_files_temp, self.quantity_files_temp_permision_error)
         self.logInformation("[%TEMP%]", self.quantity_files_tempwin, self.quantity_files_tempwin_permision_error)
         self.logInformation("PREFETCH", self.quantity_files_prefetch, self.quantity_files_prefetch_permision_error)
@@ -89,4 +98,4 @@ init_class.addValueInPathFolders()
 init_class.removeAllFilesTempPath()
 init_class.removeAllFilesTempWinPath()
 init_class.removeAllFilesPrefetchPath()
-init_class.showInformationForUser()
+init_class.showInformationForUser(False)
