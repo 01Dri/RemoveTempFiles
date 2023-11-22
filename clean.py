@@ -87,7 +87,7 @@ class TempDelFiles:
     def logInformation(self, path_name, quantity_files_removed, quantity_errors_permission):
         print("")
         if quantity_files_removed == 0 and quantity_errors_permission > 0:
-            print(f"ALGUNS ARQUIVOS NA PASTA {path_name} NÃO FORAM APAGADOS, QUANTIDADE: " + Fore.RED + f'{quantity_errors_permission}' + Style.RESET_ALL)
+            print(f"ALGUNS ARQUIVOS NA PASTA {path_name} NÃO FORAM APAGADOS POIS ESTÃO SENDO UTILIZADOS, QUANTIDADE: " + Fore.RED + f'{quantity_errors_permission}' + Style.RESET_ALL)
         elif quantity_files_removed == 0 and quantity_errors_permission == 0:
             print(Fore.BLUE + f"A PASTA {path_name} ESTAVA VAZIA!!!"  + Style.RESET_ALL)
         elif quantity_files_removed > 0 and quantity_errors_permission == 0:
