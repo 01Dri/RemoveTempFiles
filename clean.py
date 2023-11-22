@@ -1,8 +1,11 @@
 import os
+from colorama import init, Fore, Back, Style
+
 
 class TempDelFiles:
 
     def __init__(self) -> None:
+        init()
         self.TEMP = None
         self.PLUSTEMP = None
         self.PREFETCH = None
@@ -66,9 +69,7 @@ class TempDelFiles:
 
     def showInformationForUser(self):
         os.system('cls')
-        print("=====================================================")
-        print(f"OLÁ {self.nick.upper()} SEGUE OS ARQUIVOS APAGADOS: ")
-        print("=====================================================")
+        print(Fore.WHITE + f">>>> DRI LIXEIRO PASSANDO <<<<" + Style.RESET_ALL)
         self.logInformation("TEMP", self.quantity_files_temp, self.quantity_files_temp_permision_error)
         
         self.logInformation("[%TEMP%]", self.quantity_files_tempwin, self.quantity_files_tempwin_permision_error)
@@ -77,14 +78,13 @@ class TempDelFiles:
         
     def logInformation(self, path_name, quantity_files_removed, quantity_errors_permission):
         print("")
-        if quantity_files_removed > 0:
-            print(f"ARQUIVOS APAGADOS EM {path_name}: " + f'{quantity_files_removed}')
-        else:
-            print(f"A PASTA {path_name} ESTAVA VAZIA!!!")
-        if quantity_errors_permission > 0:
-            print(f"ALGUNS ARQUIVOS NA PASTA {path_name} NÃO FORAM APAGADOS, QUANTIDADE: " + f'{quantity_errors_permission}')
-
-
+        if quantity_files_removed == 0 and quantity_errors_permission > 0:
+            print(f"ALGUNS ARQUIVOS NA PASTA {path_name} NÃO FORAM APAGADOS, QUANTIDADE: " + Fore.RED + f'{quantity_errors_permission}' + Style.RESET_ALL)
+        elif quantity_files_removed == 0 and quantity_errors_permission == 0:
+            print(Fore.BLUE + f"A PASTA {path_name} ESTAVA VAZIA!!!"  + Style.RESET_ALL)
+        elif quantity_files_removed > 0 and quantity_errors_permission == 0:
+            print(f"ARQUIVOS APAGADOS EM {path_name}: " + Fore.GREEN + f'{quantity_files_removed}' + Style.RESET_ALL)
+            
 
 init_class = TempDelFiles()
 init_class.addValueInPathFolders()
